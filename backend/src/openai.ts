@@ -14,17 +14,18 @@ const BlogPostSchema = z.object({
  * Reads the system prompt from a file path specified in environment variable
  */
 async function getSystemPrompt(): Promise<string> {
-  const promptPath =
-    process.env.SYSTEM_PROMPT_PATH ||
-    "/Users/dere/BlogCommits-1/prompts/blog.txt";
+  const { readFile } = await import('fs/promises');
+  const { resolve } = await import('path');
+  
+  const promptPath = process.env.SYSTEM_PROMPT_PATH || "../prompts/blog.txt";
+  const fullPath = resolve(promptPath);
 
   try {
-    const file = Bun.file(promptPath);
-    const text = await file.text();
+    const text = await readFile(fullPath, 'utf-8');
     return text;
   } catch (error) {
     throw new Error(
-      `Failed to read system prompt from ${promptPath}: ${error}`
+      `Failed to read system prompt from ${fullPath}: ${error}`
     );
   }
 }
@@ -73,7 +74,7 @@ ${context}`;
   const userPrompt = formatCommitsForPrompt(commits);
 
   const completion = await openai.beta.chat.completions.parse({
-    model: "gpt-4o-2024-08-06",
+    model: "gpt-4o-mini",
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt },
