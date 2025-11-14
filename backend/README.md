@@ -51,9 +51,15 @@ Generates a blog post from a GitHub repository's commits.
 
 ```json
 {
-  "url": "https://github.com/owner/repo"
+  "url": "https://github.com/owner/repo",
+  "context": "This project is a REST API built with Node.js that helps users track their fitness goals."
 }
 ```
+
+**Parameters:**
+
+- `url` (required): The GitHub repository URL
+- `context` (required): Additional context about the blog post - describes the project's purpose, key features, or the story you want to tell. This helps guide the AI in generating a more relevant and focused blog post.
 
 **Response:**
 
@@ -91,7 +97,10 @@ Health check endpoint.
 ```bash
 curl -X POST http://localhost:3000/api/repo \
   -H "Content-Type: application/json" \
-  -d '{"url": "https://github.com/Dere-Wah/BlogCommits"}'
+  -d '{
+    "url": "https://github.com/Dere-Wah/BlogCommits",
+    "context": "This is a tool that automatically generates blog posts from git commit history, making it easy for developers to document their project journey."
+  }'
 ```
 
 ## Customization

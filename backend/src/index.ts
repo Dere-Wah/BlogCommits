@@ -26,7 +26,7 @@ const server = Bun.serve({
     // POST /api/repo endpoint
     if (url.pathname === "/api/repo" && req.method === "POST") {
       try {
-        const body = (await req.json()) as { url?: string };
+        const body = (await req.json()) as { url?: string; context?: string };
 
         // Validate request body
         if (!body.url) {
@@ -39,7 +39,18 @@ const server = Bun.serve({
           );
         }
 
+        if (!body.context) {
+          return new Response(
+            JSON.stringify({ error: "Context is required" }),
+            {
+              status: 400,
+              headers: { ...corsHeaders, "Content-Type": "application/json" },
+            }
+          );
+        }
+
         const repoUrl = body.url;
+        const context = body.context;
 
         // Fetch commits from GitHub
         console.log(`Fetching commits from ${repoUrl}...`);
@@ -48,7 +59,7 @@ const server = Bun.serve({
 
         // Generate blog post using OpenAI
         console.log("Generating blog post...");
-        const blogPost = await generateBlogPost(commits);
+        const blogPost = await generateBlogPost(commits, context);
         console.log("Blog post generated successfully");
 
         // Return the generated blog post

@@ -47,9 +47,13 @@ Message: ${commit.message}
 /**
  * Generates a blog post from commits using OpenAI's API
  * @param commits - Array of commit data
+ * @param context - Additional context about the blogpost to generate
  * @returns Generated blog post in markdown format
  */
-export async function generateBlogPost(commits: CommitData[]): Promise<string> {
+export async function generateBlogPost(
+  commits: CommitData[],
+  context: string
+): Promise<string> {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     throw new Error("OPENAI_API_KEY is not set");
@@ -59,7 +63,13 @@ export async function generateBlogPost(commits: CommitData[]): Promise<string> {
     apiKey,
   });
 
-  const systemPrompt = await getSystemPrompt();
+  const baseSystemPrompt = await getSystemPrompt();
+  // Append the context to the system prompt to give additional guidance
+  const systemPrompt = `${baseSystemPrompt}
+
+Context for this blog post:
+${context}`;
+
   const userPrompt = formatCommitsForPrompt(commits);
 
   const completion = await openai.beta.chat.completions.parse({
