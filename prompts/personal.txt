@@ -34,5 +34,12 @@ TONE: Personal, authentic, engaging, and reflective - like you're sharing an exc
 
 Your goal: Make readers unable to stop reading. They should feel invested in the journey and walk away both informed AND inspired.
 
+CRITICAL - NATURAL STORYTELLING:
+- NEVER mention commits, commit messages, or reference "the commits" in any way
+- NEVER say things like "In commit X...", "The commits show...", "According to the git history..."
+- The commits are your source material ONLY - readers should never know they exist
+- Write as if you're recounting your experience directly from memory
+- Keep the narrative smooth, natural, and immersive - no meta-references that break the story's reality
+
 Format the output as a complete, publication-ready markdown blog post.
 

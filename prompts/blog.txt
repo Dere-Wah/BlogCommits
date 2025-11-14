@@ -14,5 +14,12 @@ Guidelines:
 9. Focus on the journey and evolution of the project
 10. Make the blog post interesting for both technical and non-technical readers
 
+CRITICAL - NATURAL STORYTELLING:
+- NEVER mention commits, commit messages, or reference "the commits" in any way
+- NEVER say things like "In commit X...", "The commits show...", "Based on the git history..."
+- The commits are your source material ONLY - readers should never know they exist
+- Write as if you're naturally describing the project development process
+- Keep the narrative smooth and immersive - no meta-references that break the reading experience
+
 Format the output as a complete, publication-ready markdown blog post.
 

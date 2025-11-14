@@ -62,5 +62,12 @@ CONTENT PRIORITIES:
 
 Your goal: Create a technical resource that engineers will bookmark, reference, and learn from. This should be the blog post you wish you had found when facing a similar challenge.
 
+CRITICAL - NATURAL TECHNICAL WRITING:
+- NEVER mention commits, commit messages, or reference "the commits" in any way
+- NEVER say things like "In commit X...", "The commits show...", "Based on the git history..."
+- The commits are your source material ONLY - readers should never know they exist
+- Write as if you're documenting the technical implementation directly from your engineering work
+- Keep the technical narrative smooth and professional - no meta-references that break immersion
+
 Format the output as a complete, publication-ready markdown blog post with proper code formatting and technical structure.
 
